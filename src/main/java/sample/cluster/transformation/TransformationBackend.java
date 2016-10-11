@@ -3,6 +3,7 @@ package sample.cluster.transformation;
 import static sample.cluster.transformation.TransformationMessages.BACKEND_REGISTRATION;
 import sample.cluster.transformation.TransformationMessages.TransformationJob;
 import sample.cluster.transformation.TransformationMessages.TransformationResult;
+import akka.actor.ActorSelection;
 import akka.actor.UntypedActor;
 import akka.cluster.Cluster;
 import akka.cluster.ClusterEvent.CurrentClusterState;
@@ -52,9 +53,12 @@ public class TransformationBackend extends UntypedActor {
   }
 
   void register(Member member) {
-    if (member.hasRole("frontend"))
-      getContext().actorSelection(member.address() + "/user/frontend").tell(
-          BACKEND_REGISTRATION, getSelf());
+    if (member.hasRole("frontend")) {
+      System.out.println(member.address().toString());
+      ActorSelection actors = getContext().actorSelection(member.address() + "/user/frontend");
+      System.out.println(actors.toString());
+      actors.tell(BACKEND_REGISTRATION, getSelf());
+    }
   }
 }
 //#backend

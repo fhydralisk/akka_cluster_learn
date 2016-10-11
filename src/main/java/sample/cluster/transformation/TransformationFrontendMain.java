@@ -34,6 +34,7 @@ public class TransformationFrontendMain {
     final Timeout timeout = new Timeout(Duration.create(5, TimeUnit.SECONDS));
     final ExecutionContext ec = system.dispatcher();
     final AtomicInteger counter = new AtomicInteger();
+    //System.out.println("path of frontend:" + frontend.path().toString());
 
     system.scheduler().schedule(interval, interval, new Runnable() {
       public void run() {

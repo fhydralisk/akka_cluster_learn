@@ -3,6 +3,7 @@ package sample.cluster.transformation;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
+import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 
@@ -18,6 +19,7 @@ public class TransformationBackendMain {
     ActorSystem system = ActorSystem.create("ClusterSystem", config);
 
     system.actorOf(Props.create(TransformationBackend.class), "backend");
+   // System.out.println("path of frontend:" + backend.path().toString());
 
   }
 
