@@ -18,8 +18,8 @@ public class TransformationBackendMain {
 
     ActorSystem system = ActorSystem.create("ClusterSystem", config);
 
-    system.actorOf(Props.create(TransformationBackend.class), "backend");
-   // System.out.println("path of frontend:" + backend.path().toString());
+    ActorRef backend = system.actorOf(Props.create(TransformationBackend.class), "backend");
+    System.out.println("path of backend:" + backend.path().toString());
 
   }
 
